@@ -1,6 +1,6 @@
 <?php
 
-define("BASEURL", "http://localhost/Latihan/mvc/TemplateMVC/public/");
+define("BASEURL", "http://localhost/Latihan/mvc/public/");
 
 // DATANASE
 define('DB_HOST', 'localhost');
