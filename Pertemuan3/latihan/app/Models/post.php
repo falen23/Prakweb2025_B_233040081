@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class post extends Model
+class Post extends Model
 {
     use HasFactory;
 
@@ -18,33 +18,45 @@ class post extends Model
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
-
     }
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(category::class, 'category_id');
-
+        return $this->belongsTo(category::class);
     }
 
-    public function scopeFilter(Builder $query, array $filters): void 
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
+
+    public function scopeFilter(Builder $query, array $filters): void
     {
         $query->when(
-            $filters['Search'] ?? false, fn($query, $seacrh) => $query->where('title', 'Like',
-            '%' .   $seacrh . '%')
-        );
-
-        $query->when(
-            $filters['category'] ?? false , fn($query, $category) => $query->whereHas('category', fn($query)
-            => $query->where('slug', $category)
+            $filters['Search'] ?? false,
+            fn($query, $seacrh) => $query->where(
+                'title',
+                'Like',
+                '%' .   $seacrh . '%'
             )
         );
 
         $query->when(
-            $filters['author'] ?? false, fn($query, $author) => $query->whereHas('author', fn($query)
-            => $query->where('username', $author)
+            $filters['category'] ?? false,
+            fn($query, $category) => $query->whereHas(
+                'category',
+                fn($query)
+                => $query->where('slug', $category)
+            )
+        );
+
+        $query->when(
+            $filters['author'] ?? false,
+            fn($query, $author) => $query->whereHas(
+                'author',
+                fn($query)
+                => $query->where('username', $author)
             )
         );
     }
-
 }

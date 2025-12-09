@@ -10,7 +10,13 @@ namespace App\Http\Controllers;
  {
      public function index()
      {
-        $posts = Post::all();
+        $posts = Post::with(['author', 'category'])->get();
          return view('posts', compact('posts'));
+     }
+
+     public function show(Post $post)
+     {
+        $post->load(['author', 'category']);
+        return view('post', compact('post'));
      }
  }

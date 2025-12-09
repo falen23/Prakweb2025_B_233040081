@@ -20,6 +20,7 @@
                 <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 hover:text-indigo-600 transition-colors duration-200">
                     <a href="/posts/{{ $post->slug }}">
                         {{ $post->title }}
+                        
                     </a>
                 </h2>
 

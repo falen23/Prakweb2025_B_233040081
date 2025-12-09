@@ -27,9 +27,6 @@
                 <div class="flex items-center">
                     <a href="/" class="text-xl font-extrabold text-blue-400 hover:text-blue-200 tracking-wider">
                         COMMANDER
-                        @auth
-                            {{ Auth::user()->name }}
-                        @endauth
                     </a>
                 </div>
 
@@ -41,17 +38,7 @@
                         class="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">About</a>
                     <a href="/categories"
                         class="text-gray-300 hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">Category</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
-                        @csrf
-                    </form>
-
-                    <nav>
-                        <!-- tombol logout yang memicu form di atas -->
-                        <a href="#"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                    </nav>
                 </div>
-
 
                 {{-- Mobile Menu Button (Placeholder untuk tampilan mobile sederhana) --}}
                 <div class="flex items-center md:hidden">
@@ -91,6 +78,17 @@
             </div>
         </div>
     </footer>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        {{-- Tambahkan slot baru dengan nama $title --}}
+        <title>{{ $title }}</title>
+        @vite('resources/css/app.css')
+        {{-- flowbite --}}
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+    </head>
 
 </body>
 
